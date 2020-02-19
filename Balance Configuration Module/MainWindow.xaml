@@ -1,0 +1,65 @@
+﻿<Window x:Class="Balance_Configuration_Module.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Balance_Configuration_Module"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <TreeView>
+                <TreeViewItem Header="Level 1" IsExpanded="True">
+                    <TreeViewItem Header="Level 2.1" />
+                    <TreeViewItem Header="Level 2.2" IsExpanded="True">
+                        <TreeViewItem Header="Level 3.1" />
+                        <TreeViewItem Header="Level 3.2" />
+                    </TreeViewItem>
+                    <TreeViewItem Header="Level 2.3" />
+                </TreeViewItem>
+            </TreeView>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition Height="50*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DataGrid Grid.Row="0">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Tag" IsReadOnly="True">
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Value" IsReadOnly="True">
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Timestamp" IsReadOnly="True">
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90*"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="10*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0" Margin="0,0,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Tag" IsReadOnly="True">
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Value" IsReadOnly="True">
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Timestamp" IsReadOnly="True">
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="2" VerticalAlignment="Center" Margin="314,2,2,2">Update</Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

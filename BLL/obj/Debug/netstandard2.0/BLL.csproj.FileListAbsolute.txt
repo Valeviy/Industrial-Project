@@ -1,0 +1,8 @@
+C:\Users\Михаил\source\repos\Balance Configuration Module\BLL\bin\Debug\netstandard2.0\BLL.deps.json
+C:\Users\Михаил\source\repos\Balance Configuration Module\BLL\bin\Debug\netstandard2.0\BLL.dll
+C:\Users\Михаил\source\repos\Balance Configuration Module\BLL\bin\Debug\netstandard2.0\BLL.pdb
+C:\Users\Михаил\source\repos\Balance Configuration Module\BLL\obj\Debug\netstandard2.0\BLL.csprojAssemblyReference.cache
+C:\Users\Михаил\source\repos\Balance Configuration Module\BLL\obj\Debug\netstandard2.0\BLL.AssemblyInfoInputs.cache
+C:\Users\Михаил\source\repos\Balance Configuration Module\BLL\obj\Debug\netstandard2.0\BLL.AssemblyInfo.cs
+C:\Users\Михаил\source\repos\Balance Configuration Module\BLL\obj\Debug\netstandard2.0\BLL.dll
+C:\Users\Михаил\source\repos\Balance Configuration Module\BLL\obj\Debug\netstandard2.0\BLL.pdb
