@@ -1,8 +1,0 @@
-C:\Users\Михаил\source\repos\Balance Configuration Module\DAL\bin\Debug\netstandard2.0\DAL.deps.json
-C:\Users\Михаил\source\repos\Balance Configuration Module\DAL\bin\Debug\netstandard2.0\DAL.dll
-C:\Users\Михаил\source\repos\Balance Configuration Module\DAL\bin\Debug\netstandard2.0\DAL.pdb
-C:\Users\Михаил\source\repos\Balance Configuration Module\DAL\obj\Debug\netstandard2.0\DAL.csprojAssemblyReference.cache
-C:\Users\Михаил\source\repos\Balance Configuration Module\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfoInputs.cache
-C:\Users\Михаил\source\repos\Balance Configuration Module\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfo.cs
-C:\Users\Михаил\source\repos\Balance Configuration Module\DAL\obj\Debug\netstandard2.0\DAL.dll
-C:\Users\Михаил\source\repos\Balance Configuration Module\DAL\obj\Debug\netstandard2.0\DAL.pdb

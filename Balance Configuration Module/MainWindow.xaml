@@ -58,7 +58,8 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Grid.Row="2" VerticalAlignment="Center" Margin="314,2,2,2">Update</Button>
+                <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">Update</Button>
+                <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" >Add new data</Button>
             </Grid>
         </Grid>
     </Grid>
