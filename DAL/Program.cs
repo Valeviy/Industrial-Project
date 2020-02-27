@@ -10,6 +10,7 @@ namespace DAL
     {
         static void Main(string[] args)
         {
+            
         }
     }
 }

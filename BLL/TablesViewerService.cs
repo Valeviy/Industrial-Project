@@ -15,5 +15,10 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
+
+        public List<object> GetTablesList()
+        {
+            return new List<object>();
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace ESA
     {
         public bool CheckSession()
         {
-
+            return false;
         }
     }
 }
