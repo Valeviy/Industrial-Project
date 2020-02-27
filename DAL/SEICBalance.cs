@@ -5,9 +5,9 @@ namespace DAL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Model1 : DbContext
+    public partial class SEICBalance : DbContext
     {
-        public Model1()
+        public SEICBalance()
             : base("name=SEICBalance")
         {
         }
