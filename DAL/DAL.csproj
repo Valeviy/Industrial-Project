@@ -53,13 +53,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BGroups.cs" />
+    <Compile Include="ITEMDB.cs" />
+    <Compile Include="SEICALARMHISTORY.cs" />
     <Compile Include="SEICBalance.cs" />
     <Compile Include="Points.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SEICEVENTHISTORY.cs" />
     <Compile Include="SEIC_v_MappingITEH.cs" />
+    <Compile Include="SEIC_v_TREND.cs" />
     <Compile Include="sysdiagrams.cs" />
     <Compile Include="v_BGroups.cs" />
+    <Compile Include="v_TREND002.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
