@@ -62,6 +62,7 @@
     <Compile Include="SEICEVENTHISTORY.cs" />
     <Compile Include="SEIC_v_MappingITEH.cs" />
     <Compile Include="SEIC_v_TREND.cs" />
+    <Compile Include="SourceDB.cs" />
     <Compile Include="sysdiagrams.cs" />
     <Compile Include="v_BGroups.cs" />
     <Compile Include="v_TREND002.cs" />
