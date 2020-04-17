@@ -1,0 +1,9 @@
+Z:\Industrial-Project\Industrial-Project\BCG.Model\bin\Debug\netstandard2.0\BCG.Model.deps.json
+Z:\Industrial-Project\Industrial-Project\BCG.Model\bin\Debug\netstandard2.0\BCG.Model.dll
+Z:\Industrial-Project\Industrial-Project\BCG.Model\bin\Debug\netstandard2.0\BCG.Model.pdb
+Z:\Industrial-Project\Industrial-Project\BCG.Model\obj\Debug\netstandard2.0\BCG.Model.csprojAssemblyReference.cache
+Z:\Industrial-Project\Industrial-Project\BCG.Model\obj\Debug\netstandard2.0\BCG.Model.csproj.CoreCompileInputs.cache
+Z:\Industrial-Project\Industrial-Project\BCG.Model\obj\Debug\netstandard2.0\BCG.Model.AssemblyInfoInputs.cache
+Z:\Industrial-Project\Industrial-Project\BCG.Model\obj\Debug\netstandard2.0\BCG.Model.AssemblyInfo.cs
+Z:\Industrial-Project\Industrial-Project\BCG.Model\obj\Debug\netstandard2.0\BCG.Model.dll
+Z:\Industrial-Project\Industrial-Project\BCG.Model\obj\Debug\netstandard2.0\BCG.Model.pdb

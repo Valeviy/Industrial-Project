@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="BCG.UI.exe" version="1.0.0.0" publicKeyToken="c6fbdc9fd957e490" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="BCG.UI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="BCG.UI.exe" parameters="" />
+    <hostInBrowser xmlns="urn:schemas-microsoft-com:asm.v3" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="Internet" Description="Default rights given to Internet applications" ID="Custom" SameSite="site">
+          <IPermission version="1" class="System.Security.Permissions.FileDialogPermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Access="Open" />
+          <IPermission UserQuota="1024000" version="1" class="System.Security.Permissions.IsolatedStorageFilePermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Allowed="ApplicationIsolationByUser" />
+          <IPermission version="1" class="System.Security.Permissions.SecurityPermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Flags="Execution" />
+          <IPermission version="1" class="System.Security.Permissions.UIPermission, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Clipboard="OwnClipboard" Window="SafeTopLevelWindows" />
+          <IPermission version="1" class="System.Drawing.Printing.PrintingPermission, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Level="SafePrinting" />
+          <IPermission version="1" class="System.Security.Permissions.MediaPermission, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Audio="SafeAudio" Image="SafeImage" Video="SafeVideo" />
+          <IPermission version="1" class="System.Security.Permissions.WebBrowserPermission, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Level="Safe" />
+        </PermissionSet>
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BCG.DataAccess.dll" size="3584">
+      <assemblyIdentity name="BCG.DataAccess" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>cF8HBPz9RazN+quAtbs06Ijqx7QLWLxWjP8MACUc6K4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BCG.Model.dll" size="3584">
+      <assemblyIdentity name="BCG.Model" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>fSn2iw+pO99ufXdIcv39gobtHTsEW3xqqA3maXWma4U=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BCG.UI.exe" size="8640">
+      <assemblyIdentity name="BCG.UI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>7PVBh3RTL7y+pvhdVnBCeiF9krTlBpXJTC+Gimp3hq8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+<publisherIdentity name="CN=DESKTOP-73G1DME\lera0" issuerKeyHash="6603805ab8f0b6e9c01714431844233869ed8a90" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>U5KDTVLyHg/BUAf8kOV+PifX0nY=</DigestValue></Reference></SignedInfo><SignatureValue>LrYMgP4MR3KwNgsSJB9sHkaVF+n+G/nAarBz8Ov4zidfLOvHFaDEATT6/IU3SR7aAJA4Lqgn+CvI48Da1uca1ELBZTFIr2sPihzqIss2eGhQ88hcqC86O613MTCse1hhQNlTBJJbwn85x+3Zaqs5RCGxHOChnaZNAyW/v9RkdDo=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>2NU2hKq/ZovPTqqXCDiLC94L+PgEvLSOjTxnU+PQmZO3hea1WFOKqCt13rh0pp348v9YiZWJOP+hv469u8C9Y8dsxRBN/B/YgwDfmvd1k+UMJ1TiQ9yr4/cw/GsqAU1bnv/bSZxKdjzX6dMGS4inRdDx27GKrpTl4e/kKydBdEU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="76d2d7273e7ee590fc0750c10f1ef2524d839253" Description="" Url=""><as:assemblyIdentity name="BCG.UI.exe" version="1.0.0.0" publicKeyToken="c6fbdc9fd957e490" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-73G1DME\lera0</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>m+E224tVvVwgQKoolzQ1lFTG+EY=</DigestValue></Reference></SignedInfo><SignatureValue>OhG0yXdCm+Gqj+0DYtzk916r6qr6SkhS2GI0URLDzI/FXqGs4mpBLP0utrKYBd1htecAJwSx/yWkFnNNLZDTGHfKYObT26dLr4CN5b5zdV2xvyOXQQ/1SEwWTfBgkF+lmd+QFZYfZBfUpQLCOWwXfqFWjyf1S53rfs2KoFO9Eu4=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>2NU2hKq/ZovPTqqXCDiLC94L+PgEvLSOjTxnU+PQmZO3hea1WFOKqCt13rh0pp348v9YiZWJOP+hv469u8C9Y8dsxRBN/B/YgwDfmvd1k+UMJ1TiQ9yr4/cw/GsqAU1bnv/bSZxKdjzX6dMGS4inRdDx27GKrpTl4e/kKydBdEU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQMeoLRq/Pt5dE0VktfY62cTANBgkqhkiG9w0BAQUFADA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtADcAMwBHADEARABNAEUAXABsAGUAcgBhADAwHhcNMjAwNDE3MTI1MjU1WhcNMjEwNDE3MTg1MjU1WjA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtADcAMwBHADEARABNAEUAXABsAGUAcgBhADAwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANjVNoSqv2aLz06qlwg4iwveC/j4BLy0jo08Z1Pj0JmTt4XmtVhTiqgrdd64dKad+PL/WImViTj/ob+OvbvAvWPHbMUQTfwf2IMA35r3dZPlDCdU4kPcq+P3MPxrKgFNW57/20mcSnY81+nTBkuIp0XQ8duxiq6U5eHv5CsnQXRFAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAZJ1aZu2CI0sD87i/7snVr/ceRblCHXHiqe7CrK7b2T8W5C5e5VSrr+3BQDXmmwwqYHeVu6W3/UNx4RmKfGsD/+uJOqcFgYGvU91mG6+0sgEDpnW3osFJdg0TbNJffza5O4yOrsggpjWyxYZ7iiVkOXx8DD9bof6gn/0ptc4QENg=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

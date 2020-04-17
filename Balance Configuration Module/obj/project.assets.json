@@ -42,23 +42,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Михаил\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\lera0\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Михаил\\source\\repos\\Balance Configuration Module\\Industrial-Project\\Balance Configuration Module\\Balance Configuration Module.csproj",
+      "projectUniqueName": "Z:\\Industrial-Project\\Industrial-Project\\Balance Configuration Module\\Balance Configuration Module.csproj",
       "projectName": "Balance Configuration Module",
-      "projectPath": "C:\\Users\\Михаил\\source\\repos\\Balance Configuration Module\\Industrial-Project\\Balance Configuration Module\\Balance Configuration Module.csproj",
-      "packagesPath": "C:\\Users\\Михаил\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Михаил\\source\\repos\\Balance Configuration Module\\Industrial-Project\\Balance Configuration Module\\obj\\",
+      "projectPath": "Z:\\Industrial-Project\\Industrial-Project\\Balance Configuration Module\\Balance Configuration Module.csproj",
+      "packagesPath": "C:\\Users\\lera0\\.nuget\\packages\\",
+      "outputPath": "Z:\\Industrial-Project\\Industrial-Project\\Balance Configuration Module\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Михаил\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lera0\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -105,7 +101,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

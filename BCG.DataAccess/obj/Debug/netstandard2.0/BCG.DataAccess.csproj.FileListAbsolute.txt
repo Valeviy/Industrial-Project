@@ -1,0 +1,12 @@
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\bin\Debug\netstandard2.0\BCG.DataAccess.deps.json
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\bin\Debug\netstandard2.0\BCG.DataAccess.dll
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\bin\Debug\netstandard2.0\BCG.DataAccess.pdb
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\bin\Debug\netstandard2.0\BCG.Model.dll
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\bin\Debug\netstandard2.0\BCG.Model.pdb
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\obj\Debug\netstandard2.0\BCG.DataAccess.csprojAssemblyReference.cache
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\obj\Debug\netstandard2.0\BCG.DataAccess.csproj.CoreCompileInputs.cache
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\obj\Debug\netstandard2.0\BCG.DataAccess.AssemblyInfoInputs.cache
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\obj\Debug\netstandard2.0\BCG.DataAccess.AssemblyInfo.cs
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\obj\Debug\netstandard2.0\BCG.DataAccess.csproj.CopyComplete
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\obj\Debug\netstandard2.0\BCG.DataAccess.dll
+Z:\Industrial-Project\Industrial-Project\BCG.DataAccess\obj\Debug\netstandard2.0\BCG.DataAccess.pdb

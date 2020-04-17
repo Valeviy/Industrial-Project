@@ -1,31 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Industrial-Project\\Industrial-Project\\Balance Configuration Module\\Balance Configuration Module.csproj": {}
+    "Z:\\Industrial-Project\\Industrial-Project\\BCG.Model\\BCG.Model.csproj": {}
   },
   "projects": {
-    "Z:\\Industrial-Project\\Industrial-Project\\Balance Configuration Module\\Balance Configuration Module.csproj": {
+    "Z:\\Industrial-Project\\Industrial-Project\\BCG.Model\\BCG.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Industrial-Project\\Industrial-Project\\Balance Configuration Module\\Balance Configuration Module.csproj",
-        "projectName": "Balance Configuration Module",
-        "projectPath": "Z:\\Industrial-Project\\Industrial-Project\\Balance Configuration Module\\Balance Configuration Module.csproj",
+        "projectUniqueName": "Z:\\Industrial-Project\\Industrial-Project\\BCG.Model\\BCG.Model.csproj",
+        "projectName": "BCG.Model",
+        "projectPath": "Z:\\Industrial-Project\\Industrial-Project\\BCG.Model\\BCG.Model.csproj",
         "packagesPath": "C:\\Users\\lera0\\.nuget\\packages\\",
-        "outputPath": "Z:\\Industrial-Project\\Industrial-Project\\Balance Configuration Module\\obj\\",
+        "outputPath": "Z:\\Industrial-Project\\Industrial-Project\\BCG.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lera0\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -36,11 +36,13 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netstandard2.0": {
           "dependencies": {
-            "Autofac": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[5.1.2, )"
+              "version": "[2.0.3, )",
+              "autoReferenced": true
             }
           },
           "imports": [
@@ -53,14 +55,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.WindowsDesktop.App.WPF": {
-              "privateAssets": "none"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
