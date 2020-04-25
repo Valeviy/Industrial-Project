@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using BCG_UI.Data;
+using BCG_UI.Data.Lookups;
+using BCG_UI.Data.Repositories;
+using BCG_UI.View.Services;
 using BCG_UI.ViewModel;
 using DataAccess;
 using Prism.Events;
@@ -19,13 +22,15 @@ namespace BCG_UI.Sturtup
             builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
             builder.RegisterType<Page1>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();
+            builder.RegisterType<MessageDialogService>().As<IMessageDialogService>();
 
             builder.RegisterType<ResourcesDetailedViewModel>().As<IResourcesDetailedViewModel>();
 
             builder.RegisterType<SEICBalanceDBContext>().AsSelf();
             builder.RegisterType<LookupDataService>().AsImplementedInterfaces();
             builder.RegisterType<ResourceViewModel>().As<IResourceViewModel>();
-            builder.RegisterType<ResourceDataService>().As<IResourceDataService>();
+            builder.RegisterType<ResourceRepository>().As<IResourceRepository>();
+
 
             return builder.Build();
 

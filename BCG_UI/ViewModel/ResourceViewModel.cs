@@ -1,4 +1,5 @@
 ﻿using BCG_UI.Data;
+using BCG_UI.Data.Lookups;
 using BCG_UI.Event;
 using Model;
 using Prism.Events;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.ViewModel
 {
-   public class ResourceViewModel : ViewModelBase, IResourceViewModel
+    public class ResourceViewModel : ViewModelBase, IResourceViewModel
     {
-        
+
         private IResourceLookupDataService _resourceLookupDataService;
         private IEventAggregator _eventAggregator;
 
-        public ResourceViewModel (IResourceLookupDataService resourceLookupDataService, IEventAggregator eventAggregator)
+        public ResourceViewModel(IResourceLookupDataService resourceLookupDataService, IEventAggregator eventAggregator)
         {
             _resourceLookupDataService = resourceLookupDataService;
             _eventAggregator = eventAggregator;
@@ -47,16 +48,16 @@ namespace BCG_UI.ViewModel
 
         public ResourceItemViewModel _selectedResource;
 
-  
 
-         public ResourceItemViewModel SelectedResource
+
+        public ResourceItemViewModel SelectedResource
         {
             get { return _selectedResource; }
-            set 
-            { 
+            set
+            {
                 _selectedResource = value;
                 OnPropertyChanged();
-                if(_selectedResource != null)
+                if (_selectedResource != null)
                 {
                     _eventAggregator.GetEvent<OpenResourceDetailViewEvent>().Publish(_selectedResource.Id);
                 }

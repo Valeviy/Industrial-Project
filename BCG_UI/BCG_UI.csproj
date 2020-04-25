@@ -106,8 +106,8 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Data\IResourceLookupDataService.cs" />
-    <Compile Include="Data\LookupDataService.cs" />
+    <Compile Include="Data\Lookups\IResourceLookupDataService.cs" />
+    <Compile Include="Data\Lookups\LookupDataService.cs" />
     <Compile Include="Event\AfterResourceSavedEvent.cs" />
     <Compile Include="Event\OpenResourceDetailView.cs" />
     <Compile Include="Sturtup\Bootstraper.cs" />
@@ -127,6 +127,8 @@
     <Compile Include="View\ResourceView.xaml.cs">
       <DependentUpon>ResourceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Services\IMessageDialogService.cs" />
+    <Compile Include="View\Services\MessageDialogService.cs" />
     <Page Include="Page1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -135,8 +137,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\IResourceDataService.cs" />
-    <Compile Include="Data\ResourceDataService.cs" />
+    <Compile Include="Data\Repositories\IResourceRepository.cs" />
+    <Compile Include="Data\Repositories\ResourceDataService.cs" />
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
       <SubType>Code</SubType>

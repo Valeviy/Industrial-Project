@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCG_UI.Data
+namespace BCG_UI.Data.Repositories
 {
-    public interface IResourceDataService
+    public interface IResourceRepository
     {
         Task<Resources> GetByIdAsync(int resourceId);
-        Task SaveAsync(Resources resource);
+        Task SaveAsync();
+        bool HasChanges();
     }
 }

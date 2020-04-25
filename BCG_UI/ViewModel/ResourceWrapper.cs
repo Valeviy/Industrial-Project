@@ -12,9 +12,9 @@ namespace BCG_UI.ViewModel
 
 	public class ResourceWrapper : ModelWrapper<Resources>
 	{
-		public ResourceWrapper (Resources model) : base (model)
+		public ResourceWrapper(Resources model) : base(model)
 		{
-			
+
 		}
 
 
@@ -52,5 +52,5 @@ namespace BCG_UI.ViewModel
 			}
 
 		}
-	} 
+	}
 }

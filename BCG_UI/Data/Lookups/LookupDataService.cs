@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCG_UI.Data
+namespace BCG_UI.Data.Lookups
 {
     public class LookupDataService : IResourceLookupDataService
     {

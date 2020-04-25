@@ -28,18 +28,7 @@ namespace BCG_UI.ViewModel
 			ValidatePropertyInternal(propertyName, value);
 		}
 
-		private void ValidatePropertyInternal(string propertyName)
-		{
-			ClearErrors(propertyName);
-			var errors = ValidateProperty(propertyName);
-			if (errors != null)
-			{
-				foreach (var error in errors)
-				{
-					AddError(propertyName, error);
-				}
-			}
-		}
+
 
 
 		protected virtual IEnumerable<string> ValidateProperty(string propertyName)

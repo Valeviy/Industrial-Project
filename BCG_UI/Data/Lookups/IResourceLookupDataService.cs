@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BCG_UI.Data
+namespace BCG_UI.Data.Lookups
 {
     public interface IResourceLookupDataService
     {

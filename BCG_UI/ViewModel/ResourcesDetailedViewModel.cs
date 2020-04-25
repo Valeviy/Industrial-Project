@@ -1,4 +1,5 @@
 ﻿using BCG_UI.Data;
+using BCG_UI.Data.Repositories;
 using BCG_UI.Event;
 using Model;
 using Prism.Commands;
@@ -14,27 +15,44 @@ namespace BCG_UI.ViewModel
 {
     public class ResourcesDetailedViewModel : ViewModelBase, IResourcesDetailedViewModel
     {
-        private IResourceDataService _dataService;
+        private IResourceRepository _resourceRepository;
         private IEventAggregator _evantAggregator;
 
         public ResourceWrapper _resource;
-        public ResourcesDetailedViewModel(IResourceDataService dataService, IEventAggregator eventAggregator)
+        public ResourcesDetailedViewModel(IResourceRepository resourceRepository, IEventAggregator eventAggregator)
         {
-            _dataService = dataService;
+            _resourceRepository = resourceRepository;
             _evantAggregator = eventAggregator;
-            _evantAggregator.GetEvent<OpenResourceDetailViewEvent>().Subscribe(OpenResourceDetailView);
 
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
         }
 
+        private bool _hasChanges;
+
+        public bool HasChanges
+        {
+            get { return _hasChanges; }
+            set
+            {
+                if (_hasChanges != value)
+                {
+                    _hasChanges = value;
+                    OnPropertyChanged();
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            }
+        }
+
         private bool OnSaveCanExecute()
         {
-            return Resource != null && !Resource.HasErrors;
+            return Resource != null && !Resource.HasErrors && HasChanges;
         }
 
         private async void OnSaveExecute()
         {
-           await _dataService.SaveAsync(Resource.Model);
+
+            await _resourceRepository.SaveAsync();
+            HasChanges = _resourceRepository.HasChanges();
             _evantAggregator.GetEvent<AfterResourceSavedEvent>().Publish(new AfterResourceSavedEventArgs
             {
                 Id = Resource.ResourceID,
@@ -42,17 +60,18 @@ namespace BCG_UI.ViewModel
             });
         }
 
-        public async void OpenResourceDetailView (int resourceId)
-        {
-            await LoadAsync(resourceId);
-        }
+
 
         public async Task LoadAsync(int resourceId)
         {
-            var resource = await _dataService.GetByIdAsync(resourceId);
+            var resource = await _resourceRepository.GetByIdAsync(resourceId);
             Resource = new ResourceWrapper(resource);
             Resource.PropertyChanged += ((s, e) =>
             {
+                if (!HasChanges)
+                {
+                    HasChanges = _resourceRepository.HasChanges();
+                }
                 if (e.PropertyName == nameof(Resource.HasErrors))
                 {
                     ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
@@ -60,8 +79,8 @@ namespace BCG_UI.ViewModel
                 }
             });
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-       
-    }
+
+        }
 
 
         public ResourceWrapper Resource

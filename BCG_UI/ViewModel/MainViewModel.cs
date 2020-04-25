@@ -7,17 +7,26 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess;
 using Model;
+using Prism.Events;
+using BCG_UI.View.Services;
+using BCG_UI.Event;
 
 namespace BCG_UI.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        
+        private IEventAggregator _eventAggregator;
+        private IMessageDialogService _messageDialogService;
+        private Func<IResourcesDetailedViewModel> _resourcesDetailedViewModelCreator;
 
-        public MainViewModel(IResourceViewModel resourceViewModel, IResourcesDetailedViewModel resourcesDetailedViewModel)
+        public MainViewModel(IResourceViewModel resourceViewModel, Func<IResourcesDetailedViewModel> resourcesDetailedViewModelCreator, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
+            _eventAggregator = eventAggregator;
             ResourceViewModel = resourceViewModel;
-            ResourcesDetailedViewModel = resourcesDetailedViewModel;
+            _resourcesDetailedViewModelCreator = resourcesDetailedViewModelCreator;
+            _eventAggregator.GetEvent<OpenResourceDetailViewEvent>().Subscribe(OpenResourceDetailView);
+            _messageDialogService = messageDialogService;
+
         }
 
         public async Task LoadAsync()
@@ -28,6 +37,33 @@ namespace BCG_UI.ViewModel
 
 
         public IResourceViewModel ResourceViewModel { get; }
-        public IResourcesDetailedViewModel ResourcesDetailedViewModel { get; }
+        private IResourcesDetailedViewModel _resourcesDetailedViewModel;
+        public IResourcesDetailedViewModel ResourcesDetailedViewModel
+        {
+            get { return _resourcesDetailedViewModel; }
+            private set
+            {
+                _resourcesDetailedViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+        public async void OpenResourceDetailView(int resourceId)
+        {
+            if (ResourcesDetailedViewModel != null && ResourcesDetailedViewModel.HasChanges)
+            {
+                var result = _messageDialogService.ShowOkCancelDialog("You've made changes. Navigate away?", "Question");
+                if (result == MessageDialogResult.Cancel)
+                {
+                    return;
+                }
+
+            }
+            ResourcesDetailedViewModel = _resourcesDetailedViewModelCreator();
+
+            await ResourcesDetailedViewModel.LoadAsync(resourceId);
+        }
     }
 }
