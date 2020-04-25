@@ -9,6 +9,7 @@ namespace BCG_UI.Data
 {
     public interface IResourceDataService
     {
-        IEnumerable<Resources> GetAll();
+        Task<Resources> GetByIdAsync(int resourceId);
+        Task SaveAsync(Resources resource);
     }
 }

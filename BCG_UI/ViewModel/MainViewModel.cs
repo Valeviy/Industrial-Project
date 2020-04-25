@@ -12,38 +12,22 @@ namespace BCG_UI.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private IResourceDataService _resourceDataService;
-        private Resources _selectedResource;
+        
 
-        public MainViewModel(IResourceDataService resourceDataService)
+        public MainViewModel(IResourceViewModel resourceViewModel, IResourcesDetailedViewModel resourcesDetailedViewModel)
         {
-            Resources = new ObservableCollection<Resources>();
-            _resourceDataService = resourceDataService;
+            ResourceViewModel = resourceViewModel;
+            ResourcesDetailedViewModel = resourcesDetailedViewModel;
         }
 
-        public void Load()
+        public async Task LoadAsync()
         {
-            var resources = _resourceDataService.GetAll();
-            Resources.Clear();
-
-            foreach (var resource in resources)
-            {
-                Resources.Add(resource);
-            }
-        }
-
-        public Resources SelectedResource
-        {
-            get { return _selectedResource; }
-            set
-            {
-                _selectedResource = value;
-                OnPropertyChanged();
-            }
+            await ResourceViewModel.LoadAsync();
         }
 
 
 
-        public ObservableCollection<Resources> Resources { get; set; }
+        public IResourceViewModel ResourceViewModel { get; }
+        public IResourcesDetailedViewModel ResourcesDetailedViewModel { get; }
     }
 }

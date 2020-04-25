@@ -38,3 +38,14 @@ C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\EntityFramework.xml
 C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\Model.dll.config
 C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\lera0\source\repos\BCG\BCG_UI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\lera0\source\repos\BCG\BCG_UI\obj\Debug\View\ResourceView.g.cs
+C:\Users\lera0\source\repos\BCG\BCG_UI\obj\Debug\View\ResourceView.baml
+C:\Users\lera0\source\repos\BCG\BCG_UI\obj\Debug\View\ResourceDetailedView.g.cs
+C:\Users\lera0\source\repos\BCG\BCG_UI\obj\Debug\View\ResourceDetailedView.baml
+C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\Prism.dll
+C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\System.ValueTuple.dll
+C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\Prism.pdb
+C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\Prism.xml
+C:\Users\lera0\source\repos\BCG\BCG_UI\bin\Debug\System.ValueTuple.xml
+C:\Users\lera0\source\repos\BCG\BCG_UI\obj\Debug\App.baml

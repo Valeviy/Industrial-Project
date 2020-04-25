@@ -31,9 +31,9 @@ namespace BCG_UI
                 Loaded += Page1_Loaded;
             }
 
-            private void Page1_Loaded(object sender, RoutedEventArgs e)
+            private async void Page1_Loaded(object sender, RoutedEventArgs e)
             {
-                _viewModel.Load();
+               await _viewModel.LoadAsync();
             }
         }
     

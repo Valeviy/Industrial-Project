@@ -21,13 +21,16 @@ namespace BCG_UI
             var bootstrap = new Bootstraper();
             var container = bootstrap.Bootstrap();
             var page1 = container.Resolve<Page1>();
-            //NavigationWindow win = new NavigationWindow();
-            //win.Content = ;
-            //win.Show();
+
             this.MainWindow.Content = page1;
             this.MainWindow.Show();
 
+        }
 
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("error");
+            e.Handled = true;
         }
     }
 }

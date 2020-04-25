@@ -4,30 +4,25 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BCG_UI"
+      xmlns:view="clr-namespace:BCG_UI.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
         <ListView ItemsSource="{Binding Resources}"
                   SelectedItem="{Binding SelectedResource,Mode=TwoWay}"
                   DisplayMemberPath="ResourceName"/>
         <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Label Content="Id" Margin="10 10 10 0"/>
-            <TextBox Grid.Row="1" Text="{Binding SelectedResource.ResourceID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" />
-            <Label Grid.Row ="2" Content="Name" Margin="10 0"/>
-            <TextBox Grid.Row="3" Text="{Binding SelectedResource.ResourceName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" />
 
-
+            <view:ResourceView DataContext="{Binding ResourceViewModel}"></view:ResourceView>
         </Grid>
+
+        <view:ResourceDetailedView Grid.Column="2" DataContext="{Binding ResourcesDetailedViewModel}"/>
     </Grid>
 </Page>

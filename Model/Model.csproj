@@ -54,6 +54,7 @@
     <Compile Include="BalanceClosed.cs" />
     <Compile Include="BalanceClosed_temp.cs" />
     <Compile Include="BGroups.cs" />
+    <Compile Include="LookupItem.cs" />
     <Compile Include="Periods.cs" />
     <Compile Include="Points.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
