@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.Data.Lookups
 {
-    public class LookupDataService : IResourceLookupDataService
+    public class LookupDataService : ILookupDataService
     {
         private Func<SEICBalanceDBContext> _contextCreator;
         public LookupDataService(Func<SEICBalanceDBContext> contextCreator)
@@ -31,6 +31,8 @@ namespace BCG_UI.Data.Lookups
                 .ToListAsync();
             }
         }
+
+        
     }
 
 

@@ -1,4 +1,5 @@
-﻿using Model;
+﻿
+using Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCG_UI.ViewModel
+namespace BCG_UI.ViewModel.Wrapper
 {
 
 	public class ResourceWrapper : ModelWrapper<Resources>
@@ -39,9 +40,10 @@ namespace BCG_UI.ViewModel
 			}
 		}
 
-		public ICollection<BGroups> BGroups{
-			get { return GetValue<ICollection<BGroups>>();}
-			set{SetValue(Value);}
+		public ICollection<BGroups> BGroups
+		{
+			get { return GetValue<ICollection<BGroups>>(); }
+			set { SetValue(value); }
 		}
 
 		protected override IEnumerable<string> ValidateProperty(string propertyName)

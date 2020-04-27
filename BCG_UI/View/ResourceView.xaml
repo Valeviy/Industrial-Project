@@ -13,7 +13,16 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <ComboBox  ItemsSource="{Binding Resources}" SelectedItem="{Binding SelectedResource,Mode=TwoWay}" DisplayMemberPath="DisplayMember"/>
 
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Resources}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding DisplayMember}" Command="{Binding OpenResourceDetailViewCommand}"></Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+</ScrollViewer>
+    
     </Grid>
 </UserControl>

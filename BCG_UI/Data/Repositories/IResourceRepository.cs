@@ -12,5 +12,7 @@ namespace BCG_UI.Data.Repositories
         Task<Resources> GetByIdAsync(int resourceId);
         Task SaveAsync();
         bool HasChanges();
+        void Add(Resources resource);
+        void Remove(Resources model);
     }
 }

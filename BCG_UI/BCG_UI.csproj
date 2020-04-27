@@ -106,14 +106,12 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Data\Lookups\IResourceLookupDataService.cs" />
+    <Compile Include="Data\Lookups\ILookupDataService.cs" />
     <Compile Include="Data\Lookups\LookupDataService.cs" />
     <Compile Include="Event\AfterResourceSavedEvent.cs" />
+    <Compile Include="Event\AfterResourceDeletedEvent.cs" />
     <Compile Include="Event\OpenResourceDetailView.cs" />
     <Compile Include="Sturtup\Bootstraper.cs" />
-    <Compile Include="ViewModel\ModelWrapper.cs" />
-    <Compile Include="ViewModel\NotifyDataErrorInfoBase.cs" />
-    <Compile Include="ViewModel\ResourceWrapper.cs" />
     <Compile Include="ViewModel\ResourceItemViewModel.cs" />
     <Compile Include="ViewModel\IResourcesDetailedViewModel.cs" />
     <Compile Include="ViewModel\IResourceViewModel.cs" />
@@ -129,6 +127,10 @@
     </Compile>
     <Compile Include="View\Services\IMessageDialogService.cs" />
     <Compile Include="View\Services\MessageDialogService.cs" />
+    <Compile Include="Wrapper\ResourceWrapper.cs" />
+    <Compile Include="Wrapper\ModelWrapper.cs" />
+    <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
+    <Compile Include="Wrapper\ResourceBGroupWrapper.cs" />
     <Page Include="Page1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

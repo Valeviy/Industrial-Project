@@ -22,7 +22,7 @@ namespace BCG_UI.Data.Repositories
 
         public async Task<Resources> GetByIdAsync(int resourceId)
         {
-            return await _context.Resources.SingleAsync(f => f.ResourceID == resourceId);
+            return await _context.Resources.Include(f => f.BGroups).SingleAsync(f => f.ResourceID == resourceId);
 
         }
 
@@ -34,6 +34,16 @@ namespace BCG_UI.Data.Repositories
         public bool HasChanges()
         {
             return _context.ChangeTracker.HasChanges();
+        }
+
+        public void Add(Resources resource)
+        {
+            _context.Resources.Add(resource);
+        }
+
+        public void Remove(Resources model)
+        {
+            _context.Resources.Remove(model);
         }
     }
 }

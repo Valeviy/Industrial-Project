@@ -15,31 +15,39 @@ namespace BCG_UI.ViewModel
     public class ResourceViewModel : ViewModelBase, IResourceViewModel
     {
 
-        private IResourceLookupDataService _resourceLookupDataService;
+        private ILookupDataService _lookupDataService;
         private IEventAggregator _eventAggregator;
 
-        public ResourceViewModel(IResourceLookupDataService resourceLookupDataService, IEventAggregator eventAggregator)
+        public ResourceViewModel(ILookupDataService lookupDataService, IEventAggregator eventAggregator)
         {
-            _resourceLookupDataService = resourceLookupDataService;
+            _lookupDataService = lookupDataService;
             _eventAggregator = eventAggregator;
             Resources = new ObservableCollection<ResourceItemViewModel>();
             _eventAggregator.GetEvent<AfterResourceSavedEvent>().Subscribe(AfterResourceSaved);
+            _eventAggregator.GetEvent<AfterResourceDeletedEvent>().Subscribe(AfterResourceDeleted);
         }
 
         private void AfterResourceSaved(AfterResourceSavedEventArgs obj)
         {
-            var lookupItem = Resources.Single(l => l.Id == obj.Id);
-            lookupItem.DisplayMember = obj.DisplayMember;
+            var lookupItem = Resources.SingleOrDefault(l => l.Id == obj.Id);
+            if (lookupItem == null)
+            {
+                Resources.Add(new ResourceItemViewModel(obj.Id, obj.DisplayMember,_eventAggregator ));
+            }
+            else
+            {
 
+                lookupItem.DisplayMember = obj.DisplayMember;
+            }
         }
 
         public async Task LoadAsync()
         {
-            var lookup = await _resourceLookupDataService.GetResourceLookupAsync();
+            var lookup = await _lookupDataService.GetResourceLookupAsync();
             Resources.Clear();
             foreach (var item in lookup)
             {
-                Resources.Add(new ResourceItemViewModel(item.Id, item.DisplayMember));
+                Resources.Add(new ResourceItemViewModel(item.Id, item.DisplayMember,_eventAggregator));
             }
         }
 
@@ -59,8 +67,16 @@ namespace BCG_UI.ViewModel
                 OnPropertyChanged();
                 if (_selectedResource != null)
                 {
-                    _eventAggregator.GetEvent<OpenResourceDetailViewEvent>().Publish(_selectedResource.Id);
                 }
+            }
+        }
+
+        private void AfterResourceDeleted(int resourceId)
+        {
+            var resource = Resources.SingleOrDefault(f => f.Id == resourceId);
+            if (resource != null)
+            {
+                Resources.Remove(resource);
             }
         }
     }

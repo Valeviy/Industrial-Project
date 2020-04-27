@@ -10,6 +10,8 @@ using Model;
 using Prism.Events;
 using BCG_UI.View.Services;
 using BCG_UI.Event;
+using Prism.Commands;
+using System.Windows.Input;
 
 namespace BCG_UI.ViewModel
 {
@@ -26,6 +28,8 @@ namespace BCG_UI.ViewModel
             _resourcesDetailedViewModelCreator = resourcesDetailedViewModelCreator;
             _eventAggregator.GetEvent<OpenResourceDetailViewEvent>().Subscribe(OpenResourceDetailView);
             _messageDialogService = messageDialogService;
+            CreateNewResourceCommand = new DelegateCommand(OnCreateNewResourceExecute);
+            _eventAggregator.GetEvent<AfterResourceDeletedEvent>().Subscribe(AfterResourceDeleted);
 
         }
 
@@ -50,7 +54,7 @@ namespace BCG_UI.ViewModel
 
 
 
-        public async void OpenResourceDetailView(int resourceId)
+        public async void OpenResourceDetailView(int? resourceId)
         {
             if (ResourcesDetailedViewModel != null && ResourcesDetailedViewModel.HasChanges)
             {
@@ -64,6 +68,19 @@ namespace BCG_UI.ViewModel
             ResourcesDetailedViewModel = _resourcesDetailedViewModelCreator();
 
             await ResourcesDetailedViewModel.LoadAsync(resourceId);
+        }
+
+
+        public ICommand CreateNewResourceCommand { get; }
+
+        private void OnCreateNewResourceExecute()
+        {
+            OpenResourceDetailView(null);
+        }
+
+        private void AfterResourceDeleted(int resourceId)
+        {
+            ResourcesDetailedViewModel = null;
         }
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.Event
 {
-    public class OpenResourceDetailViewEvent:PubSubEvent<int?>
-    {
+	public class AfterResourceDeletedEvent : PubSubEvent<int>
+	{
 
-    }
+	}
 }
