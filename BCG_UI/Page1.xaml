@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <Menu Grid.ColumnSpan = "2" FontSize = "20">
             <MenuItem Header = "Create">
-                <MenuItem Header = "New Resource" Command = "{Binding CreateNewResourceCommand}" >
+                <MenuItem Header = "New Resource" Command = "{Binding CreateNewDetailCommand}" CommandParameter = "{x:Type viewModel:ResourcesDetailedViewModel}" >
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -32,7 +32,7 @@
             <view:ResourceView DataContext="{Binding ResourceViewModel}"></view:ResourceView>
         </Grid>
 
-        <ContentControl  Grid.Column="2"  Content="{Binding ResourcesDetailedViewModel}">
+        <ContentControl  Grid.Column="2"  Content="{Binding DetailViewModel}">
         </ContentControl>
     </Grid>
 </Page>

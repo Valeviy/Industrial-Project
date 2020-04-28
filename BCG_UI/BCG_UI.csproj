@@ -108,10 +108,14 @@
     </ApplicationDefinition>
     <Compile Include="Data\Lookups\ILookupDataService.cs" />
     <Compile Include="Data\Lookups\LookupDataService.cs" />
+    <Compile Include="Data\Repositories\GenericRepository.cs" />
+    <Compile Include="Data\Repositories\IGenericRepository.cs" />
     <Compile Include="Event\AfterResourceSavedEvent.cs" />
-    <Compile Include="Event\AfterResourceDeletedEvent.cs" />
-    <Compile Include="Event\OpenResourceDetailView.cs" />
+    <Compile Include="Event\AfterDetailDeletedEvent.cs" />
+    <Compile Include="Event\OpenDetailViewEvent.cs" />
     <Compile Include="Sturtup\Bootstraper.cs" />
+    <Compile Include="ViewModel\DetailViewModelBase.cs" />
+    <Compile Include="ViewModel\IDetailedViewModel.cs" />
     <Compile Include="ViewModel\ResourceItemViewModel.cs" />
     <Compile Include="ViewModel\IResourcesDetailedViewModel.cs" />
     <Compile Include="ViewModel\IResourceViewModel.cs" />
@@ -140,7 +144,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\Repositories\IResourceRepository.cs" />
-    <Compile Include="Data\Repositories\ResourceDataService.cs" />
+    <Compile Include="Data\Repositories\ResourceRepository.cs" />
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
       <SubType>Code</SubType>

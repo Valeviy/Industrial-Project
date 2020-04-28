@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.Data.Repositories
 {
-    public interface IResourceRepository
+    public interface IResourceRepository : IGenericRepository<Resources>
     {
-        Task<Resources> GetByIdAsync(int resourceId);
-        Task SaveAsync();
-        bool HasChanges();
-        void Add(Resources resource);
-        void Remove(Resources model);
+      
+        void RemoveBGroup(BGroups model);
     }
 }

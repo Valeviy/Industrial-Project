@@ -1,4 +1,5 @@
 ﻿using Model;
+using System.Collections.Generic;
 
 namespace BCG_UI.ViewModel.Wrapper
 {
@@ -22,9 +23,16 @@ namespace BCG_UI.ViewModel.Wrapper
 		}
 
 
-		public string ValidDisbalance
+		public float ValidDisbalance
 		{
-			get { return GetValue<string>(); }
+			get { return GetValue<float>(); }
+			set { SetValue(value); }
+		}
+
+		
+		public ICollection<BGroups> BGroups1
+		{
+			get { return GetValue<ICollection<BGroups>>(); }
 			set { SetValue(value); }
 		}
 

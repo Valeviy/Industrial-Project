@@ -26,10 +26,10 @@ namespace BCG_UI.ViewModel
             _eventAggregator = eventAggregator;
             ResourceViewModel = resourceViewModel;
             _resourcesDetailedViewModelCreator = resourcesDetailedViewModelCreator;
-            _eventAggregator.GetEvent<OpenResourceDetailViewEvent>().Subscribe(OpenResourceDetailView);
+            _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
             _messageDialogService = messageDialogService;
-            CreateNewResourceCommand = new DelegateCommand(OnCreateNewResourceExecute);
-            _eventAggregator.GetEvent<AfterResourceDeletedEvent>().Subscribe(AfterResourceDeleted);
+            CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
+            _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
 
         }
 
@@ -41,46 +41,54 @@ namespace BCG_UI.ViewModel
 
 
         public IResourceViewModel ResourceViewModel { get; }
-        private IResourcesDetailedViewModel _resourcesDetailedViewModel;
-        public IResourcesDetailedViewModel ResourcesDetailedViewModel
+        private IDetailedViewModel _detailViewModel;
+        public IDetailedViewModel DetailViewModel
         {
-            get { return _resourcesDetailedViewModel; }
+            get { return _detailViewModel; }
             private set
             {
-                _resourcesDetailedViewModel = value;
+                _detailViewModel = value;
                 OnPropertyChanged();
             }
         }
 
 
 
-        public async void OpenResourceDetailView(int? resourceId)
+        public async void OnOpenDetailView(OpenDetailViewEventArgs args)
         {
-            if (ResourcesDetailedViewModel != null && ResourcesDetailedViewModel.HasChanges)
+            
+
+            switch (args.ViewModelName)
             {
-                var result = _messageDialogService.ShowOkCancelDialog("You've made changes. Navigate away?", "Question");
-                if (result == MessageDialogResult.Cancel)
-                {
-                    return;
-                }
+                case nameof(ResourcesDetailedViewModel):
+                    if (DetailViewModel != null && DetailViewModel.HasChanges)
+                    {
+                        var result = _messageDialogService.ShowOkCancelDialog("You've made changes. Navigate away?", "Question");
+                        if (result == MessageDialogResult.Cancel)
+                        {
+                            return;
+                        }
+
+                    }
+                    DetailViewModel = _resourcesDetailedViewModelCreator();
+                    break;
 
             }
-            ResourcesDetailedViewModel = _resourcesDetailedViewModelCreator();
 
-            await ResourcesDetailedViewModel.LoadAsync(resourceId);
+            await DetailViewModel.LoadAsync(args.Id);
         }
 
 
-        public ICommand CreateNewResourceCommand { get; }
+        public ICommand CreateNewDetailCommand { get; }
 
-        private void OnCreateNewResourceExecute()
+        private void OnCreateNewDetailExecute(Type viewModelType)
         {
-            OpenResourceDetailView(null);
+            OnOpenDetailView(new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name });
         }
 
-        private void AfterResourceDeleted(int resourceId)
+        private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
         {
-            ResourcesDetailedViewModel = null;
+            DetailViewModel = null;
         }
     }
 }

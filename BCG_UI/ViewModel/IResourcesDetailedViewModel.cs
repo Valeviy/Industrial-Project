@@ -2,9 +2,8 @@
 
 namespace BCG_UI.ViewModel
 {
-    public interface IResourcesDetailedViewModel
+    public interface IResourcesDetailedViewModel : IDetailedViewModel
     {
-        Task LoadAsync(int? resourceId);
-        bool HasChanges { get; }
+
     }
 }

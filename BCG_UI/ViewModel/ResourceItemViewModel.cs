@@ -15,13 +15,14 @@ namespace BCG_UI.ViewModel
 		private readonly IEventAggregator _eventAggregator;
 		private string _displayMember;
 
-		public ResourceItemViewModel(int id, string displayMember, IEventAggregator eventAggregator
-			)
+		public ResourceItemViewModel(int id, string displayMember, IEventAggregator eventAggregator,
+			string detailedViewModelName)
 		{
 			Id = id;
 			DisplayMember = displayMember;
 			_eventAggregator = eventAggregator;
-			OpenResourceDetailViewCommand = new DelegateCommand(OpenResourceDetailView);
+			OpenDetailViewCommand = new DelegateCommand(OpenDetailView);
+		    _detailedViewModelName = detailedViewModelName;
 		}
 
 		public int Id { get; }
@@ -36,11 +37,18 @@ namespace BCG_UI.ViewModel
 			}
 		}
 
-		public ICommand OpenResourceDetailViewCommand { get; }
+		public ICommand OpenDetailViewCommand { get; }
 
-		public void OpenResourceDetailView()
+		private string _detailedViewModelName;
+
+		public void OpenDetailView()
 		{
-			_eventAggregator.GetEvent<OpenResourceDetailViewEvent>().Publish(Id);
+			_eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs
+			{
+				Id = Id,
+				ViewModelName = _detailedViewModelName
+			}
+		);
 
 		}
 	}

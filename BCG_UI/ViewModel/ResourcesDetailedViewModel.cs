@@ -18,21 +18,17 @@ using System.Windows.Input;
 
 namespace BCG_UI.ViewModel
 {
-    public class ResourcesDetailedViewModel : ViewModelBase, IResourcesDetailedViewModel
+
+    public class ResourcesDetailedViewModel : DetailViewModelBase, IResourcesDetailedViewModel
     {
         private IResourceRepository _resourceRepository;
-        private IEventAggregator _evantAggregator;
         private IMessageDialogService _messageDialogService;
 
         public ResourceWrapper _resource;
-        public ResourcesDetailedViewModel(IResourceRepository resourceRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService )
+        public ResourcesDetailedViewModel(IResourceRepository resourceRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService ): base(eventAggregator)
         {
             _resourceRepository = resourceRepository;
-            _evantAggregator = eventAggregator;
             _messageDialogService = messageDialogService;
-
-            SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
-            DeleteCommand = new DelegateCommand(OnDeleteExecute);
 
             AddBGroupCommand = new DelegateCommand(OnAddBGroupExecute);
             RemoveBGroupCommand = new DelegateCommand(OnRemoveBGroupExecute, OnRemoveBGoupCanExecute);
@@ -42,56 +38,57 @@ namespace BCG_UI.ViewModel
 
         private void OnRemoveBGroupExecute()
         {
-            throw new NotImplementedException();
+            SelectedBGroup.PropertyChanged -= ResourceBGroupWrapper_PropertyChanged;
+	        _resourceRepository.RemoveBGroup(SelectedBGroup.Model);
+	        BGroups.Remove(SelectedBGroup);
+	        SelectedBGroup = null;
+	        HasChanges = _resourceRepository.HasChanges();
+	        ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
 
         private void OnAddBGroupExecute()
         {
-            throw new NotImplementedException();
+            var newBGroup = new ResourceBGroupWrapper(new BGroups());
+            newBGroup.PropertyChanged += ResourceBGroupWrapper_PropertyChanged;
+            BGroups.Add(newBGroup);
+            Resource.Model.BGroups.Add(newBGroup.Model);
+            newBGroup.BGroupName = "";
         }
 
-        private bool _hasChanges;
 
-        public bool HasChanges
-        {
-            get { return _hasChanges; }
-            set
-            {
-                if (_hasChanges != value)
-                {
-                    _hasChanges = value;
-                    OnPropertyChanged();
-                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-                }
-            }
-        }
-
-        private bool OnSaveCanExecute()
+        protected override bool OnSaveCanExecute()
         {
             return Resource != null && !Resource.HasErrors && HasChanges && BGroups.All(pn => !pn.HasErrors);
         }
 
-        private async void OnSaveExecute()
+        protected override async void OnSaveExecute()
         {
 
             await _resourceRepository.SaveAsync();
             HasChanges = _resourceRepository.HasChanges();
-            _evantAggregator.GetEvent<AfterResourceSavedEvent>().Publish(new AfterResourceSavedEventArgs
-            {
-                Id = Resource.ResourceID,
-                DisplayMember = $"{Resource.ResourceName}"
-            });
+            RaiseDetailSavedEvent(Resource.ResourceID, $"");
         }
 
 
 
-        public async Task LoadAsync(int? resourceId)
+        public override async Task LoadAsync(int? resourceId)
         {
             var resource = resourceId.HasValue
             ? await _resourceRepository.GetByIdAsync(resourceId.Value)
             : CreateNewResource();
 
             //InitializeResource
+            InitializeResource(resource);
+
+
+
+            //initialize BGroups
+            InitializeBGroups(Resource.BGroups);
+
+        }
+
+        private void InitializeResource(Resources resource)
+        {
             Resource = new ResourceWrapper(resource);
             Resource.PropertyChanged += ((s, e) =>
             {
@@ -110,12 +107,6 @@ namespace BCG_UI.ViewModel
             {
                 Resource.ResourceName = "";
             }
-          
-           
-
-            //initialize BGroups
-            InitializeBGroups(Resource.BGroups);
-
         }
 
         private void InitializeBGroups(ICollection<BGroups> bGroups)
@@ -155,7 +146,6 @@ namespace BCG_UI.ViewModel
             }
         }
 
-        public ICommand SaveCommand { get; set; }
 
         private Resources CreateNewResource()
         {
@@ -165,16 +155,14 @@ namespace BCG_UI.ViewModel
 
         }
 
-        public ICommand DeleteCommand { get; }
-
-        private async void OnDeleteExecute()
+        protected override async void OnDeleteExecute()
         {
 
             var result = _messageDialogService.ShowOkCancelDialog($"Do you really want to delete the Resource {Resource.ResourceName}?", "Question");
             if (result == MessageDialogResult.OK){
                 _resourceRepository.Remove(Resource.Model);
                 await _resourceRepository.SaveAsync();
-                _evantAggregator.GetEvent<AfterResourceDeletedEvent>().Publish(Resource.ResourceID);
+                RaiseDetailDeletedEvent(Resource.ResourceID);            
             }
         }
 
