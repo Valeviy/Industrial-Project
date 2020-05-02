@@ -33,7 +33,7 @@ namespace BCG_UI.ViewModel
             AddBGroupCommand = new DelegateCommand(OnAddBGroupExecute);
             RemoveBGroupCommand = new DelegateCommand(OnRemoveBGroupExecute, OnRemoveBGoupCanExecute);
 
-            BGroups = new ObservableCollection<BGroupWrapper>();
+            BGroups = new ObservableCollection<BGroupItemViewModel>();
         }
 
         private void OnRemoveBGroupExecute()
@@ -76,11 +76,11 @@ namespace BCG_UI.ViewModel
         {
             ICollection <BGroups> bGroups = await _bGroupRepository.GetRootsAsync(resourceId.Value);
 
-            ObservableCollection<BGroupWrapper> groups = new ObservableCollection<BGroupWrapper>();
+            ObservableCollection<BGroupItemViewModel> groups = new ObservableCollection<BGroupItemViewModel>();
 
             foreach (var item in bGroups)
             {
-                groups.Add(new BGroupWrapper(item));
+                groups.Add(new BGroupItemViewModel(item.BGroupID, item.BGroupName, item.ValidDisbalance, ""));
             }
 
             foreach (var item in groups)
@@ -93,17 +93,17 @@ namespace BCG_UI.ViewModel
         }
 
 
-        private void LoadSubGroups(BGroupWrapper item)
+        private void LoadSubGroups(BGroupItemViewModel item)
         {
 
-            ICollection<BGroups> result =  _bGroupRepository.GetChildrenAsync(item.Model.BGroupID);
-            ObservableCollection<BGroupWrapper> groups = new ObservableCollection<BGroupWrapper>();
+            ICollection<BGroups> result =  _bGroupRepository.GetChildrenAsync(item.Id);
+            ObservableCollection<BGroupItemViewModel> groups = new ObservableCollection<BGroupItemViewModel>();
 
             if (result != null)
             {
                 foreach (var subitem in result)
                 {
-                    groups.Add(new BGroupWrapper(subitem));
+                    groups.Add(new BGroupItemViewModel(subitem.BGroupID, subitem.BGroupName, subitem.ValidDisbalance, ""));
                 }
 
                 item.BGroupsChildren = groups;
@@ -115,34 +115,30 @@ namespace BCG_UI.ViewModel
         }
 
 
-        private void InitializeBGroups(ICollection<BGroupWrapper> bGroups)
+        private void InitializeBGroups(ICollection<BGroupItemViewModel> bGroups)
         {
-            foreach (var wrapper in BGroups)
-            {
-                wrapper.PropertyChanged -= BGroupWrapper_PropertyChanged;
-            }
+   
             BGroups.Clear();
 
             foreach (var bGroup in bGroups)
             {
                 BGroups.Add(bGroup);
-                bGroup.PropertyChanged += BGroupWrapper_PropertyChanged;
             }
 
         }
        
 
-        private void BGroupWrapper_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (!HasChanges)
-            {
-                HasChanges = _bGroupRepository.HasChanges();
-            }
-            if (e.PropertyName == nameof(BGroupWrapper.HasErrors))
-            {
-                ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-            }
-        }
+        //private void BGroupWrapper_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    if (!HasChanges)
+        //    {
+        //        HasChanges = _bGroupRepository.HasChanges();
+        //    }
+        //    if (e.PropertyName == nameof(BGroupWrapper.HasErrors))
+        //    {
+        //        ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+        //    }
+        //}
 
 
         protected override async void OnDeleteExecute()
@@ -156,7 +152,7 @@ namespace BCG_UI.ViewModel
         //    }
         }
 
-        public ObservableCollection<BGroupWrapper> BGroups { get; }
+        public ObservableCollection<BGroupItemViewModel> BGroups { get; }
 
      
 
@@ -165,8 +161,8 @@ namespace BCG_UI.ViewModel
 
     
 
-        private BGroupWrapper _selectedBGroup;
-        public BGroupWrapper SelectedBGroup
+        private BGroupItemViewModel _selectedBGroup;
+        public BGroupItemViewModel SelectedBGroup
         {
             get { return _selectedBGroup; }
             set

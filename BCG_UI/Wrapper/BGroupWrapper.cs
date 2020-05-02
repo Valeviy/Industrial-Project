@@ -42,14 +42,5 @@ namespace BCG_UI.ViewModel.Wrapper
 		}
 
 
-		private ICollection<BGroupWrapper> _bGroupWrappers;
-		public ICollection<BGroupWrapper> BGroupsChildren
-		{
-			get { return _bGroupWrappers; }
-			set { _bGroupWrappers = value;
-				OnPropertyChanged();
-			}
-		}
-
 	}
 }

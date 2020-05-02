@@ -16,8 +16,9 @@
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Ресурсы:"></Label>
-        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Resources}"  DisplayMemberPath="DisplayMember" SelectedItem="{Binding SelectedResource, Mode=TwoWay}">
+        <Label Grid.Column="0" Grid.Row="0" Content="Ресурсы:" Margin="10 10 10 10" ></Label>
+        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Resources}"  DisplayMemberPath="DisplayMember"  IsSynchronizedWithCurrentItem="True"
+        SelectedIndex="0" SelectedItem="{Binding SelectedResource, Mode=TwoWay}" Margin="10 10 10 10">
       
         </ComboBox>
 

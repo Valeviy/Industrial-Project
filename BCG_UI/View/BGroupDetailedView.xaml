@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="BCG_UI.View.BGroupDetailedView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:e="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:BCG_UI.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+            <TreeView  ItemsSource="{Binding BGroups}" Margin="10 10 10 10">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding BGroupsChildren}" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding DisplayMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="3 2" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+                <e:Interaction.Behaviors>
+                    <local:BindableSelectedItemBehavior SelectedItem="{Binding SelectedBGroup, Mode=TwoWay}" />
+                </e:Interaction.Behaviors>
+            </TreeView>
+
+        </ScrollViewer>
+
+        <Label Grid.Row ="1" Grid.Column="0" Content="Допустимый дисбаланс:" Margin="10 10 10 10"/>
+        <Label Grid.Row ="1" Grid.Column="1" Content="{Binding SelectedBGroup.ValidDisbalance,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 10 10 10"/>
+
+       
+    </Grid>
+</UserControl>

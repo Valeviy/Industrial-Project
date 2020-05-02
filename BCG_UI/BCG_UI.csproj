@@ -122,6 +122,7 @@
     <Compile Include="Event\AfterDetailDeletedEvent.cs" />
     <Compile Include="Event\OpenDetailViewEvent.cs" />
     <Compile Include="Sturtup\Bootstraper.cs" />
+    <Compile Include="ViewModel\BGroupItemViewModel.cs" />
     <Compile Include="ViewModel\DetailViewModelBase.cs" />
     <Compile Include="ViewModel\IDetailedViewModel.cs" />
     <Compile Include="ViewModel\ResourceItemViewModel.cs" />
@@ -132,8 +133,8 @@
     <Compile Include="ViewModel\ResourceViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Attached.cs" />
-    <Compile Include="View\ResourceDetailedView.xaml.cs">
-      <DependentUpon>ResourceDetailedView.xaml</DependentUpon>
+    <Compile Include="View\BGroupDetailedView.xaml.cs">
+      <DependentUpon>BGroupDetailedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ResourceView.xaml.cs">
       <DependentUpon>ResourceView.xaml</DependentUpon>
@@ -158,7 +159,7 @@
       <DependentUpon>Page1.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\ResourceDetailedView.xaml">
+    <Page Include="View\BGroupDetailedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
