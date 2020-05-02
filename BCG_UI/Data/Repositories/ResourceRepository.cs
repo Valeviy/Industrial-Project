@@ -25,9 +25,9 @@ namespace BCG_UI.Data.Repositories
         }
 
 
-        public void RemoveBGroup(BGroups model)
-        {
-            Context.BGroups.Remove(model);
-        }
+        //public void RemoveBGroup(BGroups model)
+        //{
+        //    Context.BGroups.Remove(model);
+        //}
     }
 }

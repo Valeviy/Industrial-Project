@@ -3,48 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:e="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:BCG_UI.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="450">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition/>
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Content="Id" Margin="10 10 10 0"/>
-        <TextBox Grid.Row="1" Text="{Binding Resource.ResourceID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" />
-        <Label Grid.Row ="2" Content="Name" Margin="10 0"/>
-        <TextBox Grid.Row="3" Text="{Binding Resource.ResourceName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" Margin="10 0 10 10" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
 
-        <DockPanel Grid.Row="8" Margin="10">
-            <StackPanel DockPanel.Dock="Right">
-                <Button Content="Add" Width="125" Margin="10"
-        Command="{Binding AddBGroupCommand}"/>
-                <Button Content="Remove" Width="125" Margin="10"
-        Command="{Binding RemoveBGroupCommand}"/>
-            </StackPanel>
-           
-            <DataGrid ItemsSource="{Binding BGroups}"
-SelectedItem="{Binding SelectedBGroup, Mode=TwoWay}"
-AutoGenerateColumns = "False" RowHeaderWidth="0">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="BGroups" Width="*" Binding="{Binding BGroupName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            </DockPanel>
-        <StackPanel Grid.Row="9" Orientation="Horizontal">
-                <Button Content="Save" Width="125" Margin="10"
-                    Command="{Binding SaveCommand}" />
-                <Button Content="Delete" Width="125" Margin="10"
-                    Command="{Binding DeleteCommand}" />
-            </StackPanel>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+
+            <TreeView  ItemsSource="{Binding BGroups}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding BGroupsChildren}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding BGroupName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="3 2" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+                <e:Interaction.Behaviors>
+                    <local:BindableSelectedItemBehavior SelectedItem="{Binding SelectedBGroup, Mode=TwoWay}" />
+                </e:Interaction.Behaviors>
+            </TreeView>
+
+        </ScrollViewer>
+
+        <Label Grid.Row ="1" Grid.Column="0" Content="Допустимый дисбаланс:"/>
+        <Label Grid.Row ="1" Grid.Column="1" Content="{Binding SelectedBGroup.ValidDisbalance,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0"/>
+
+       
     </Grid>
 </UserControl>

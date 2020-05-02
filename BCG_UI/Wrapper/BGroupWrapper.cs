@@ -1,0 +1,55 @@
+﻿using Model;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace BCG_UI.ViewModel.Wrapper
+{
+	public class BGroupWrapper : ModelWrapper<BGroups>
+	{
+		public BGroupWrapper(BGroups model) : base(model)
+		{
+
+		}
+		public int BGroupID
+		{
+			get { return GetValue<int>(); }
+			set { SetValue(value); }
+		}
+		public string BGroupName
+		{
+			get { return GetValue<string>(); }
+			set { SetValue(value); }
+		}
+
+		public int? BGroupIDParent
+		{
+			get { return GetValue<int?>(); }
+			set { SetValue(value); }
+		}
+
+
+		public float ValidDisbalance
+		{
+			get { return GetValue<float>(); }
+			set { SetValue(value); }
+		}
+
+		
+		public ICollection<BGroups> BGroups1
+		{
+			get { return GetValue<ICollection<BGroups>>(); }
+			set { SetValue(value); }
+		}
+
+
+		private ICollection<BGroupWrapper> _bGroupWrappers;
+		public ICollection<BGroupWrapper> BGroupsChildren
+		{
+			get { return _bGroupWrappers; }
+			set { _bGroupWrappers = value;
+				OnPropertyChanged();
+			}
+		}
+
+	}
+}

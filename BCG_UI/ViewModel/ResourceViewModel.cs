@@ -23,29 +23,8 @@ namespace BCG_UI.ViewModel
             _lookupDataService = lookupDataService;
             _eventAggregator = eventAggregator;
             Resources = new ObservableCollection<ResourceItemViewModel>();
-            _eventAggregator.GetEvent<AfterDetailSavedEvent>().Subscribe(AfterDetailSaved);
-            _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
         }
 
-        private void AfterDetailSaved(AfterDetailSavedEventArgs obj)
-        {
-            switch (obj.ViewModelName)
-            {
-                case nameof(ResourcesDetailedViewModel):
-                    var lookupItem = Resources.SingleOrDefault(l => l.Id == obj.Id);
-                    if (lookupItem == null)
-                    {
-                        Resources.Add(new ResourceItemViewModel(obj.Id, obj.DisplayMember, _eventAggregator, nameof(ResourcesDetailedViewModel)));
-                    }
-                    else
-                    {
-
-                        lookupItem.DisplayMember = obj.DisplayMember;
-                    }
-                    break;
-            }
-            
-        }
 
         public async Task LoadAsync()
         {
@@ -53,7 +32,7 @@ namespace BCG_UI.ViewModel
             Resources.Clear();
             foreach (var item in lookup)
             {
-                Resources.Add(new ResourceItemViewModel(item.Id, item.DisplayMember,_eventAggregator, nameof(ResourcesDetailedViewModel)));
+                Resources.Add(new ResourceItemViewModel(item.Id, item.DisplayMember, nameof(BGroupDetailedViewModel)));
             }
         }
 
@@ -62,8 +41,16 @@ namespace BCG_UI.ViewModel
 
         public ResourceItemViewModel _selectedResource;
 
-
-
+        public void OpenDetailView(ResourceItemViewModel var)
+        {
+            _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs
+            {
+                Id = var.Id,
+                ViewModelName = var.DetailedViewModelName
+            });
+     
+        }
+        
         public ResourceItemViewModel SelectedResource
         {
             get { return _selectedResource; }
@@ -73,23 +60,9 @@ namespace BCG_UI.ViewModel
                 OnPropertyChanged();
                 if (_selectedResource != null)
                 {
+                    OpenDetailView(_selectedResource);
                 }
             }
-        }
-
-        private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
-        {
-            switch (args.ViewModelName)
-            {
-                case nameof(ResourcesDetailedViewModel):
-                    var resource = Resources.SingleOrDefault(f => f.Id == args.Id);
-                    if (resource != null)
-                    {
-                        Resources.Remove(resource);
-                    }
-                    break;
-            }
-            
         }
     }
 }

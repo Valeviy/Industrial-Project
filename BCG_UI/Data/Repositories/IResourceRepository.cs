@@ -10,6 +10,6 @@ namespace BCG_UI.Data.Repositories
     public interface IResourceRepository : IGenericRepository<Resources>
     {
       
-        void RemoveBGroup(BGroups model);
+        //void RemoveBGroup(BGroups model);
     }
 }
