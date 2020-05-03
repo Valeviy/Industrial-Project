@@ -8,6 +8,8 @@ namespace BCG_UI.Data.Repositories
     {
         Task<List<BGroups>> GetRootsAsync(int resourceId);
 
-        List<BGroups> GetChildrenAsync(int parentId);
+        List<BGroups> GetChildren(int parentId);
+
+        void RemoveBGroup(int bGroupID);
     }
 }

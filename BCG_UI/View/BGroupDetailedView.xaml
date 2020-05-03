@@ -10,15 +10,26 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition ></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition ></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+        <DockPanel Grid.Row="0">
+            <StackPanel DockPanel.Dock="Left">
+                <Button  Content="Добавить группу" Margin="10 10 10 10"></Button>
+                <Button  Command="{Binding ChangeBGroupCommand}"  Content="Изменить группу" Margin="10 10 10 10"></Button>
+                <Button  Command="{Binding RemoveBGroupCommand}"  Content="Удалить группу" Margin="10 10 10 10"></Button>
+            </StackPanel>
+        </DockPanel>
+        
+        <ScrollViewer Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
             <TreeView  ItemsSource="{Binding BGroups}" Margin="10 10 10 10">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding BGroupsChildren}" >
@@ -28,14 +39,14 @@
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
                 <e:Interaction.Behaviors>
-                    <local:BindableSelectedItemBehavior SelectedItem="{Binding SelectedBGroup, Mode=TwoWay}" />
+                    <local:BindableSelectedItemBehavior SelectedItem="{Binding SelectedBGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </e:Interaction.Behaviors>
             </TreeView>
 
         </ScrollViewer>
 
-        <Label Grid.Row ="1" Grid.Column="0" Content="Допустимый дисбаланс:" Margin="10 10 10 10"/>
-        <Label Grid.Row ="1" Grid.Column="1" Content="{Binding SelectedBGroup.ValidDisbalance,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 10 10 10"/>
+        <Label Grid.Row ="3" Grid.Column="1" Content="Допустимый дисбаланс:" Margin="10 10 10 10"/>
+        <Label Grid.Row ="3" Grid.Column="2" Content="{Binding SelectedBGroup.ValidDisbalance,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 10 10 10"/>
 
        
     </Grid>

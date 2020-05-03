@@ -27,11 +27,22 @@ namespace BCG_UI.Data.Repositories
 
         }
 
-        public List<BGroups> GetChildrenAsync(int parentId)
+        public List<BGroups> GetChildren(int parentId)
         {
             return Context.Set<BGroups>().Where(b => b.BGroupIDParent == parentId)
                 .ToList();
 
+        }
+
+        public void RemoveBGroup(int bGroupID)
+        {
+            //todo: remove not only one group, add children, points, rules 
+            BGroups entity = Context.BGroups.Single(b => b.BGroupID == bGroupID);
+
+            
+
+
+            Context.BGroups.Remove(entity);
         }
     }
 }

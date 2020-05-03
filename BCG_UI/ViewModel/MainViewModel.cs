@@ -19,13 +19,13 @@ namespace BCG_UI.ViewModel
     {
         private IEventAggregator _eventAggregator;
         private IMessageDialogService _messageDialogService;
-        private Func<IBGroupDetailedViewModel> _resourcesDetailedViewModelCreator;
+        private Func<IBGroupDetailedViewModel> _bGroupsDetailedViewModelCreator;
 
-        public MainViewModel(IResourceViewModel resourceViewModel, Func<IBGroupDetailedViewModel> resourcesDetailedViewModelCreator, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
+        public MainViewModel(IResourceViewModel resourceViewModel, Func<IBGroupDetailedViewModel> bGroupsDetailedViewModelCreator, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
             _eventAggregator = eventAggregator;
             ResourceViewModel = resourceViewModel;
-            _resourcesDetailedViewModelCreator = resourcesDetailedViewModelCreator;
+            _bGroupsDetailedViewModelCreator = bGroupsDetailedViewModelCreator;
             _messageDialogService = messageDialogService;
             CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
             _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
@@ -69,7 +69,7 @@ namespace BCG_UI.ViewModel
                         }
 
                     }
-                    DetailViewModel = _resourcesDetailedViewModelCreator();
+                    DetailViewModel = _bGroupsDetailedViewModelCreator();
                     break;
 
             }
@@ -85,9 +85,9 @@ namespace BCG_UI.ViewModel
             OnOpenDetailView(new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name });
         }
 
-        private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
+        private async void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
         {
-            DetailViewModel = null;
+            await DetailViewModel.LoadAsync(args.Id);
         }
     }
 }

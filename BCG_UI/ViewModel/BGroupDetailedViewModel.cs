@@ -25,35 +25,145 @@ namespace BCG_UI.ViewModel
         private IBGroupRepository _bGroupRepository;
         private IMessageDialogService _messageDialogService;
 
-        public BGroupDetailedViewModel(IBGroupRepository bGroupRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService ): base(eventAggregator)
+        public BGroupDetailedViewModel(IBGroupRepository bGroupRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService) : base(eventAggregator)
         {
             _bGroupRepository = bGroupRepository;
             _messageDialogService = messageDialogService;
 
-            AddBGroupCommand = new DelegateCommand(OnAddBGroupExecute);
-            RemoveBGroupCommand = new DelegateCommand(OnRemoveBGroupExecute, OnRemoveBGoupCanExecute);
+            RemoveBGroupCommand = new DelegateCommand(OnRemoveBGoup, OnRemoveBGoupCanExecute);
+            ChangeBGroupCommand = new DelegateCommand(OnChangeBGoup, OnChangeBGoupCanExecute);
 
             BGroups = new ObservableCollection<BGroupItemViewModel>();
         }
 
-        private void OnRemoveBGroupExecute()
+        private async void OnRemoveBGoup()
         {
-         //   SelectedBGroup.PropertyChanged -= BGroupWrapper_PropertyChanged;
-	        //_resourceRepository.RemoveBGroup(SelectedBGroup.Model);
-	        //BGroups.Remove(SelectedBGroup);
-	        //SelectedBGroup = null;
-	        //HasChanges = _resourceRepository.HasChanges();
-	        //((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+            var message = "";
+
+            if (SelectedBGroup.BGroupsChildren.Count > 0)
+            {
+                message = "Данная группа имеет наследников!";
+            }
+            
+            var result = _messageDialogService.ShowOkCancelDialog(message + $"Вы действительно хотите удалить балансовую группу {SelectedBGroup.DisplayMember}? " , "Предупреждение");
+            
+            if (result == MessageDialogResult.OK)
+            {
+                _bGroupRepository.RemoveBGroup(SelectedBGroup.Id);
+                await _bGroupRepository.SaveAsync();
+                RaiseDetailDeletedEvent(ResourceID);            
+            }
         }
 
-        private void OnAddBGroupExecute()
+        private void OnChangeBGoup()
         {
-            //var newBGroup = new BGroupWrapper(new BGroups());
-            //newBGroup.PropertyChanged += BGroupWrapper_PropertyChanged;
-            //BGroups.Add(newBGroup);
-            //Resource.Model.BGroups.Add(newBGroup.Model);
-            //newBGroup.BGroupName = "";
+
         }
+
+        public override async Task LoadAsync(int? resourceId)
+        {
+            ResourceID = resourceId.Value;
+            ICollection<BGroups> bGroups = await _bGroupRepository.GetRootsAsync(resourceId.Value);
+
+            ObservableCollection<BGroupItemViewModel> groups = new ObservableCollection<BGroupItemViewModel>();
+
+            foreach (var item in bGroups)
+            {
+                groups.Add(new BGroupItemViewModel(item.BGroupID, item.BGroupName, item.ValidDisbalance, ""));
+            }
+
+            foreach (var item in groups)
+            {
+                LoadSubGroups(item);
+            }
+
+            InitializeBGroups(groups);
+
+        }
+
+        private void LoadSubGroups(BGroupItemViewModel item)
+        {
+
+            ICollection<BGroups> result = _bGroupRepository.GetChildren(item.Id);
+            ObservableCollection<BGroupItemViewModel> groups = new ObservableCollection<BGroupItemViewModel>();
+
+            if (result != null)
+            {
+                foreach (var subitem in result)
+                {
+                    //todo: add viewmodel name 
+                    groups.Add(new BGroupItemViewModel(subitem.BGroupID, subitem.BGroupName, subitem.ValidDisbalance, ""));
+                }
+
+                item.BGroupsChildren = groups;
+                foreach (var subitem1 in item.BGroupsChildren)
+                {
+                    LoadSubGroups(subitem1);
+                }
+            }
+        }
+
+        private void InitializeBGroups(ICollection<BGroupItemViewModel> bGroups)
+        {
+            BGroups.Clear();
+            foreach (var bGroup in bGroups)
+            {
+                BGroups.Add(bGroup);
+            }
+        }
+        public ObservableCollection<BGroupItemViewModel> BGroups { get; }
+
+        public ICommand RemoveBGroupCommand { get; }
+
+        public ICommand ChangeBGroupCommand { get; }
+
+
+        private BGroupItemViewModel _selectedBGroup;
+        public BGroupItemViewModel SelectedBGroup
+        {
+            get { return _selectedBGroup; }
+            set
+            {
+                _selectedBGroup = value;
+                OnPropertyChanged();
+                ((DelegateCommand)RemoveBGroupCommand).RaiseCanExecuteChanged();
+                //todo: add OpenDetailedView 
+            }
+        }
+
+        private bool OnRemoveBGoupCanExecute()
+        {
+            return SelectedBGroup != null;
+        }
+
+        private bool OnChangeBGoupCanExecute()
+        {
+            return SelectedBGroup != null;
+        }
+
+        private int _resourceID;
+        public int ResourceID
+        {
+            get { return _resourceID; }
+            set
+            {
+                _resourceID = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         protected override bool OnSaveCanExecute()
@@ -72,110 +182,21 @@ namespace BCG_UI.ViewModel
 
 
 
-        public override async Task LoadAsync(int? resourceId)
-        {
-            ICollection <BGroups> bGroups = await _bGroupRepository.GetRootsAsync(resourceId.Value);
+        
 
-            ObservableCollection<BGroupItemViewModel> groups = new ObservableCollection<BGroupItemViewModel>();
-
-            foreach (var item in bGroups)
-            {
-                groups.Add(new BGroupItemViewModel(item.BGroupID, item.BGroupName, item.ValidDisbalance, ""));
-            }
-
-            foreach (var item in groups)
-            {
-                LoadSubGroups(item);
-            }
-
-           InitializeBGroups(groups);
-
-        }
-
-
-        private void LoadSubGroups(BGroupItemViewModel item)
-        {
-
-            ICollection<BGroups> result =  _bGroupRepository.GetChildrenAsync(item.Id);
-            ObservableCollection<BGroupItemViewModel> groups = new ObservableCollection<BGroupItemViewModel>();
-
-            if (result != null)
-            {
-                foreach (var subitem in result)
-                {
-                    groups.Add(new BGroupItemViewModel(subitem.BGroupID, subitem.BGroupName, subitem.ValidDisbalance, ""));
-                }
-
-                item.BGroupsChildren = groups;
-                foreach (var subitem1 in item.BGroupsChildren)
-                {
-                    LoadSubGroups(subitem1);
-                }
-            }
-        }
-
-
-        private void InitializeBGroups(ICollection<BGroupItemViewModel> bGroups)
-        {
-   
-            BGroups.Clear();
-
-            foreach (var bGroup in bGroups)
-            {
-                BGroups.Add(bGroup);
-            }
-
-        }
-       
-
-        //private void BGroupWrapper_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    if (!HasChanges)
-        //    {
-        //        HasChanges = _bGroupRepository.HasChanges();
-        //    }
-        //    if (e.PropertyName == nameof(BGroupWrapper.HasErrors))
-        //    {
-        //        ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-        //    }
-        //}
-
+        
 
         protected override async void OnDeleteExecute()
         {
 
-        //    var result = _messageDialogService.ShowOkCancelDialog($"Do you really want to delete the Resource {Resource.ResourceName}?", "Question");
-        //    if (result == MessageDialogResult.OK){
-        //        _resourceRepository.Remove(Resource.Model);
-        //        await _resourceRepository.SaveAsync();
-        //        RaiseDetailDeletedEvent(Resource.ResourceID);            
-        //    }
+            //var result = _messageDialogService.ShowOkCancelDialog($"Do you really want to delete the Resource {Resource.ResourceName}?", "Question");
+            //if (result == MessageDialogResult.OK){
+            //    _resourceRepository.Remove(Resource.Model);
+            //    await _resourceRepository.SaveAsync();
+            //    RaiseDetailDeletedEvent(Resource.ResourceID);            
+            //}
         }
 
-        public ObservableCollection<BGroupItemViewModel> BGroups { get; }
-
-     
-
-        public ICommand AddBGroupCommand { get; }
-        public ICommand RemoveBGroupCommand { get; }
-
-    
-
-        private BGroupItemViewModel _selectedBGroup;
-        public BGroupItemViewModel SelectedBGroup
-        {
-            get { return _selectedBGroup; }
-            set
-            {
-                _selectedBGroup = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool OnRemoveBGoupCanExecute()
-        {
-            return SelectedBGroup != null;
-        }
-
+       
     }
 }
