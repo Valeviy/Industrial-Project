@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace BCG_UI.Data.Repositories
 {
+     //implemented F1.7 requirement
      class BGroupRepository : GenericRepository<BGroups, SEICBalanceDBContext>, IBGroupRepository
     {
         public BGroupRepository(SEICBalanceDBContext context) : base(context)

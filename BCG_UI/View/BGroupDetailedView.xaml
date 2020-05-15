@@ -20,6 +20,8 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
+        
+        <!-- implemented F1.8 requirement --!>
 
         <DockPanel Grid.Row="0">
             <StackPanel DockPanel.Dock="Left">
@@ -28,6 +30,8 @@
                 <Button  Command="{Binding RemoveBGroupCommand}"  Content="Удалить группу" Margin="10 10 10 10"></Button>
             </StackPanel>
         </DockPanel>
+
+        <!-- implemented F1.7 requirement --!>
         
         <ScrollViewer Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
             <TreeView  ItemsSource="{Binding BGroups}" Margin="10 10 10 10">
@@ -44,6 +48,8 @@
             </TreeView>
 
         </ScrollViewer>
+       
+        <!-- implemented F1.9 requirement --!>
 
         <Label Grid.Row ="3" Grid.Column="1" Content="Допустимый дисбаланс:" Margin="10 10 10 10"/>
         <Label Grid.Row ="3" Grid.Column="2" Content="{Binding SelectedBGroup.ValidDisbalance,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 10 10 10"/>

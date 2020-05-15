@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.ViewModel
 {
+    //implemented F1.6 requirement
     public class ResourceViewModel : ViewModelBase, IResourceViewModel
     {
 

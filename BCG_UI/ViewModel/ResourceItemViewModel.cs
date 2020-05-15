@@ -10,6 +10,7 @@ using System.Windows.Input;
 
 namespace BCG_UI.ViewModel
 {
+	//implemented F1.6 requirement
 	public class ResourceItemViewModel : ViewModelBase
 	{
 		private string _displayMember;

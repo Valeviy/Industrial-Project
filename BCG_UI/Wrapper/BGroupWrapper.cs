@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 
 namespace BCG_UI.ViewModel.Wrapper
 {
+	//implemented F1.7 requirement
+
 	public class BGroupWrapper : ModelWrapper<BGroups>
 	{
 		public BGroupWrapper(BGroups model) : base(model)
@@ -26,7 +28,6 @@ namespace BCG_UI.ViewModel.Wrapper
 			get { return GetValue<int?>(); }
 			set { SetValue(value); }
 		}
-
 
 		public float ValidDisbalance
 		{

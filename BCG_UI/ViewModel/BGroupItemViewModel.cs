@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.ViewModel
 {
+	//implemented F1.7 requirement
 	public class BGroupItemViewModel : ViewModelBase
 	{
 		private string _displayMember;

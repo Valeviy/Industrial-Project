@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace BCG_UI.ViewModel
 {
-
+    //implemented F1.7 requirement
     public class BGroupDetailedViewModel : DetailViewModelBase, IBGroupDetailedViewModel
     {
         private IBGroupRepository _bGroupRepository;
@@ -36,6 +36,7 @@ namespace BCG_UI.ViewModel
             BGroups = new ObservableCollection<BGroupItemViewModel>();
         }
 
+        
         private async void OnRemoveBGoup()
         {
             var message = "";

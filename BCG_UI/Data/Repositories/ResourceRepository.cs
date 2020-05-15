@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.Data.Repositories
 {
-
+    //implemented F1.6 requirement
     class ResourceRepository : GenericRepository<Resources, SEICBalanceDBContext>, IResourceRepository
 
     {
