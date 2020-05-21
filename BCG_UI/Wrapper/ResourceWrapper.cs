@@ -10,14 +10,13 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.ViewModel.Wrapper
 {
-
+	//implemented F1.6 requirement
 	public class ResourceWrapper : ModelWrapper<Resources>
 	{
 		public ResourceWrapper(Resources model) : base(model)
 		{
 
 		}
-
 
 
 		public string ResourceName

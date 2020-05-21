@@ -10,29 +10,26 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
     <Page.Resources>
-        <DataTemplate DataType="{x:Type viewModel:ResourcesDetailedViewModel}">
-            <view:ResourceDetailedView/>
+        <DataTemplate DataType="{x:Type viewModel:BGroupDetailedViewModel}">
+            <view:BGroupDetailedView/>
         </DataTemplate>
     </Page.Resources>
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Menu Grid.ColumnSpan = "2" FontSize = "20">
-            <MenuItem Header = "Create">
-                <MenuItem Header = "New Resource" Command = "{Binding CreateNewDetailCommand}" CommandParameter = "{x:Type viewModel:ResourcesDetailedViewModel}" >
-                </MenuItem>
-            </MenuItem>
-        </Menu>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="0" Grid.Row="0">
 
             <view:ResourceView DataContext="{Binding ResourceViewModel}"></view:ResourceView>
         </Grid>
 
-        <ContentControl  Grid.Column="2"  Content="{Binding DetailViewModel}">
+        <ContentControl  Grid.Column="0" Grid.Row="1"  Content="{Binding DetailViewModel}">
         </ContentControl>
     </Grid>
 </Page>

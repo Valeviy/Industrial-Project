@@ -1,27 +1,33 @@
 ﻿using Model;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace BCG_UI.ViewModel.Wrapper
 {
-	public class ResourceBGroupWrapper : ModelWrapper<BGroups>
+	//implemented F1.7 requirement
+
+	public class BGroupWrapper : ModelWrapper<BGroups>
 	{
-		public ResourceBGroupWrapper(BGroups model) : base(model)
+		public BGroupWrapper(BGroups model) : base(model)
 		{
 
 		}
-
+		public int BGroupID
+		{
+			get { return GetValue<int>(); }
+			set { SetValue(value); }
+		}
 		public string BGroupName
 		{
 			get { return GetValue<string>(); }
 			set { SetValue(value); }
 		}
 
-		public string BGroupIDParent
+		public int? BGroupIDParent
 		{
-			get { return GetValue<string>(); }
+			get { return GetValue<int?>(); }
 			set { SetValue(value); }
 		}
-
 
 		public float ValidDisbalance
 		{
@@ -35,6 +41,7 @@ namespace BCG_UI.ViewModel.Wrapper
 			get { return GetValue<ICollection<BGroups>>(); }
 			set { SetValue(value); }
 		}
+
 
 	}
 }

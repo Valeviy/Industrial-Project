@@ -2,7 +2,7 @@
 
 namespace BCG_UI.ViewModel
 {
-    public interface IResourcesDetailedViewModel : IDetailedViewModel
+    public interface IBGroupDetailedViewModel : IDetailedViewModel
     {
 
     }

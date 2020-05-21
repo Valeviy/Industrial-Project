@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BCG_UI.Data.Repositories
 {
-
+    //implemented F1.6 requirement
     class ResourceRepository : GenericRepository<Resources, SEICBalanceDBContext>, IResourceRepository
 
     {
@@ -25,9 +25,9 @@ namespace BCG_UI.Data.Repositories
         }
 
 
-        public void RemoveBGroup(BGroups model)
-        {
-            Context.BGroups.Remove(model);
-        }
+        //public void RemoveBGroup(BGroups model)
+        //{
+        //    Context.BGroups.Remove(model);
+        //}
     }
 }

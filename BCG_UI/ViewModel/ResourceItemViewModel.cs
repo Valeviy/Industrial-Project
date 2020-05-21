@@ -10,19 +10,18 @@ using System.Windows.Input;
 
 namespace BCG_UI.ViewModel
 {
+	//implemented F1.6 requirement
 	public class ResourceItemViewModel : ViewModelBase
 	{
-		private readonly IEventAggregator _eventAggregator;
 		private string _displayMember;
 
-		public ResourceItemViewModel(int id, string displayMember, IEventAggregator eventAggregator,
+		public ResourceItemViewModel(int id, string displayMember,
 			string detailedViewModelName)
 		{
 			Id = id;
 			DisplayMember = displayMember;
-			_eventAggregator = eventAggregator;
-			OpenDetailViewCommand = new DelegateCommand(OpenDetailView);
-		    _detailedViewModelName = detailedViewModelName;
+			DetailedViewModelName = detailedViewModelName;
+		    
 		}
 
 		public int Id { get; }
@@ -37,20 +36,8 @@ namespace BCG_UI.ViewModel
 			}
 		}
 
-		public ICommand OpenDetailViewCommand { get; }
+		public string DetailedViewModelName { get; }
 
-		private string _detailedViewModelName;
-
-		public void OpenDetailView()
-		{
-			_eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs
-			{
-				Id = Id,
-				ViewModelName = _detailedViewModelName
-			}
-		);
-
-		}
 	}
 
 }

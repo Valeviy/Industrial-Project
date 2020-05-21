@@ -29,7 +29,7 @@ namespace BCG_UI
 
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("error");
+            MessageBox.Show("Возникла ошибка выполнения!");
             e.Handled = true;
         }
     }

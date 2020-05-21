@@ -19,16 +19,16 @@ namespace BCG_UI.ViewModel
     {
         private IEventAggregator _eventAggregator;
         private IMessageDialogService _messageDialogService;
-        private Func<IResourcesDetailedViewModel> _resourcesDetailedViewModelCreator;
+        private Func<IBGroupDetailedViewModel> _bGroupsDetailedViewModelCreator;
 
-        public MainViewModel(IResourceViewModel resourceViewModel, Func<IResourcesDetailedViewModel> resourcesDetailedViewModelCreator, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
+        public MainViewModel(IResourceViewModel resourceViewModel, Func<IBGroupDetailedViewModel> bGroupsDetailedViewModelCreator, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
             _eventAggregator = eventAggregator;
             ResourceViewModel = resourceViewModel;
-            _resourcesDetailedViewModelCreator = resourcesDetailedViewModelCreator;
-            _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
+            _bGroupsDetailedViewModelCreator = bGroupsDetailedViewModelCreator;
             _messageDialogService = messageDialogService;
             CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
+            _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
             _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
 
         }
@@ -39,8 +39,8 @@ namespace BCG_UI.ViewModel
         }
 
 
-
         public IResourceViewModel ResourceViewModel { get; }
+        
         private IDetailedViewModel _detailViewModel;
         public IDetailedViewModel DetailViewModel
         {
@@ -57,10 +57,9 @@ namespace BCG_UI.ViewModel
         public async void OnOpenDetailView(OpenDetailViewEventArgs args)
         {
             
-
             switch (args.ViewModelName)
             {
-                case nameof(ResourcesDetailedViewModel):
+                case nameof(BGroupDetailedViewModel):
                     if (DetailViewModel != null && DetailViewModel.HasChanges)
                     {
                         var result = _messageDialogService.ShowOkCancelDialog("You've made changes. Navigate away?", "Question");
@@ -70,7 +69,7 @@ namespace BCG_UI.ViewModel
                         }
 
                     }
-                    DetailViewModel = _resourcesDetailedViewModelCreator();
+                    DetailViewModel = _bGroupsDetailedViewModelCreator();
                     break;
 
             }
@@ -86,9 +85,9 @@ namespace BCG_UI.ViewModel
             OnOpenDetailView(new OpenDetailViewEventArgs { ViewModelName = viewModelType.Name });
         }
 
-        private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
+        private async void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
         {
-            DetailViewModel = null;
+            await DetailViewModel.LoadAsync(args.Id);
         }
     }
 }

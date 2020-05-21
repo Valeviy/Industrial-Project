@@ -23,8 +23,9 @@ namespace BCG_UI.Sturtup
             builder.RegisterType<Page1>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<MessageDialogService>().As<IMessageDialogService>();
+            builder.RegisterType<BGroupRepository>().As<IBGroupRepository>();
 
-            builder.RegisterType<ResourcesDetailedViewModel>().As<IResourcesDetailedViewModel>();
+            builder.RegisterType<BGroupDetailedViewModel>().As<IBGroupDetailedViewModel>();
 
             builder.RegisterType<SEICBalanceDBContext>().AsSelf();
             builder.RegisterType<LookupDataService>().AsImplementedInterfaces();
